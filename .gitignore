@@ -2,3 +2,7 @@
 venv
 .idea
 .DS_Store
+/DjangoRestAPI/__pycache__
+/DjangoRestAPI/Product/__pycache__
+/DjangoRestAPI/Dealer/__pycache__
+/DjangoRestAPI/Company/__pycache__

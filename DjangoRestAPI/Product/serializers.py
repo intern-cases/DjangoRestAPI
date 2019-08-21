@@ -6,24 +6,25 @@ class ProductSerializer(serializers.ModelSerializer):
     #url = serializers.HyperlinkedIdentityField()
 
     class Meta:
-        model = Product
-        fields = {
+        fields = (
             'dealer',
             'photo',
             'price',
             'declaration',
-            'is_active',
             'created_date',
             'modified_date',
-        }
+        )
+        model = Product
 
 
 class ProductUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = [
+        fields = (
+            'dealer',
             'declaration',
             'photo',
             'is_active',
-        ]
+            'price',
+        )

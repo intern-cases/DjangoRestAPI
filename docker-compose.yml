@@ -14,9 +14,9 @@ services:
     image: mdillon/postgis:10
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_USER: discount
+      POSTGRES_PASSWORD: discount
+      POSTGRES_DB: discount
     ports:
       - '5430:5432'
     volumes:

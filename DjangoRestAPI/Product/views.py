@@ -1,22 +1,15 @@
-"""from django.shortcuts import render
-from rest_framework import generics
+from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView,  CreateAPIView
-from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 
 from .serializers import ProductSerializer, ProductUpdateSerializer
 from .models import Product
-#from rest_framework.permissions import IsAuthenticated, IsAdminUser
 # Create your views here.
 
 
 class ProductListAPIView(ListAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(is_active = True)
     serializer_class = ProductSerializer
-
-    def get_queryset(self):
-        queryset = Product.objects.filter(draft=False)
-        return queryset
 
 
 class ProductDetailAPIView(RetrieveAPIView):
@@ -48,9 +41,8 @@ class ProductUpdateAPIView(RetrieveUpdateAPIView):
 class ProductCreateAPIView(CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductUpdateSerializer
-    #permission_classes = IsAuthenticated
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)"""
+    #def perform_create(self, serializer):
+     #   serializer.save(user=self.request.user)
 
 

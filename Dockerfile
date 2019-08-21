@@ -15,6 +15,7 @@ RUN set -ex; \
     apt-get upgrade -y; \
     apt-get install -y build-essential; \
     apt-get install -y python-dev;\
+    apt-get install -y gdal-bin; \
     pip install -U -v setuptools; \
     pip install --no-cache-dir -r /temp/requirements.txt; \
     pip install ipdb; \

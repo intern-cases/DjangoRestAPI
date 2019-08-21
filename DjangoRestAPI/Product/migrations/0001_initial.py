@@ -22,9 +22,9 @@ class Migration(migrations.Migration):
                 ('declaration', models.CharField(max_length=500)),
                 ('photo', models.ImageField(null=True, upload_to='db')),
                 ('price', models.DecimalField(decimal_places=2, max_digits=14)),
+                ('location', django.contrib.gis.db.models.fields.PointField(default='POINT(0.0 0.0)', srid=4326)),
                 ('created_date', models.DateField(auto_now_add=True)),
                 ('modified_date', models.DateField(auto_now=True)),
-                ('user', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

@@ -1,14 +1,20 @@
 from django.db import models
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.gis.db.models import PointField
+from DjangoRestAPI.accounts.models import User
 # Create your models here.
+# company/models.py
 
 
-#company/models.py
 class Company(models.Model):
-    company_name = models.CharField(max_length=50, unique=True, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    id = models.AutoField(primary_key=True)
+    company_name = models.CharField(max_length=50, unique=True)
     working_area = models.CharField(max_length=30)
     establish_year = models.DateField()
     is_active = models.BooleanField(default=True)
-    #Location = models.
+    location = PointField(default='POINT(41.06 28.99)')
     created_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return str(self.company_name)

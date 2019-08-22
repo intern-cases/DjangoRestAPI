@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView,  CreateAPIView
 from rest_framework.response import Response
-
 from .serializers import CompanyUpdateSerializer, CompanySerializer
 from .models import Company
 # Create your views here.

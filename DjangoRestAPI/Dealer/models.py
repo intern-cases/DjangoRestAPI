@@ -1,3 +1,4 @@
+from DjangoRestAPI import settings
 from DjangoRestAPI.Company.models import Company
 from django.db import models
 from django.contrib.gis.db.models import PointField
@@ -6,9 +7,10 @@ from DjangoRestAPI.accounts.models import User
 
 # dealers/models.py
 
+
 class Dealer(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(default=None, on_delete=models.CASCADE, unique=True, to=settings.AUTH_USER_MODEL)
     name = models.CharField(max_length=50, unique=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     establish_year = models.DateField()

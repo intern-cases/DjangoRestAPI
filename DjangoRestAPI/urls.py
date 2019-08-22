@@ -23,7 +23,5 @@ urlpatterns = [
     path('products/', include('DjangoRestAPI.Product.urls')),
     path('dealers/', include('DjangoRestAPI.Dealer.urls')),
     path('companys/', include('DjangoRestAPI.Company.urls')),
-    path('signup/', views.Signup.as_view(), name='signup'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('accounts/', include('DjangoRestAPI.accounts.api.urls'))
 ]

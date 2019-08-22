@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView,  CreateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView, CreateAPIView
 from rest_framework.response import Response
 
 from .serializers import DealerSerializer, DealerUpdateSerializer
@@ -38,26 +37,7 @@ class DealerUpdateAPIView(RetrieveUpdateAPIView):
         return Response(serializer.data)
 
 
-"""class DealerCreateAPIView(CreateAPIView):
+class DealerCreateAPIView(CreateAPIView):
     queryset = Dealer.objects.all()
-    serializer_class = DealerUpdateSerializer"""
+    serializer_class = DealerUpdateSerializer
 
-from django.contrib.auth import login
-from django.views.generic import CreateView
-
-from ..forms import DealerSignUpForm
-from DjangoRestAPI.accounts.models import User
-
-
-class StudentSignUpView(CreateView):
-    model = User
-    form_class = DealerSignUpForm
-    template_name = 'signup.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'company'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)

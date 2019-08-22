@@ -3,10 +3,11 @@ from django.contrib.gis.db.models import PointField
 from DjangoRestAPI.accounts.models import User
 # Create your models here.
 # company/models.py
+from DjangoRestAPI import settings
 
 
 class Company(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(on_delete=models.CASCADE, unique=True, default=None, to=settings.AUTH_USER_MODEL)
     id = models.AutoField(primary_key=True)
     company_name = models.CharField(max_length=50, unique=True)
     working_area = models.CharField(max_length=30)

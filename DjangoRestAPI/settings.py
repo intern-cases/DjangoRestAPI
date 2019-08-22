@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'location_field.apps.DefaultConfig',
 
+    'DjangoRestAPI.accounts',
     'DjangoRestAPI.Company',
     'DjangoRestAPI.Dealer',
     'DjangoRestAPI.Product',
@@ -136,5 +137,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/home'
-LOGOUT_REDIRECT_URL = '/login'
+AUTH_USER_MODEL = "accounts.User"

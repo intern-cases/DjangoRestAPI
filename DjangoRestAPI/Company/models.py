@@ -1,9 +1,8 @@
 from django.db import models
+from DjangoRestAPI import settings
 from django.contrib.gis.db.models import PointField
 from DjangoRestAPI.accounts.models import User
 # Create your models here.
-# company/models.py
-from DjangoRestAPI import settings
 
 
 class Company(models.Model):

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
 
 from DjangoRestAPI.accounts.models import User
 
@@ -14,15 +15,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def save(self):
-        user = User(
+        user = User.objects.create(
             email=self.validated_data['email'],
             username=self.validated_data['username'],
-            password=self.validated_data['password'],
+            password=make_password(self.validated_data['password']),
             is_company=self.validated_data['is_company'],
             is_dealer=self.validated_data['is_dealer'],
             is_customer=self.validated_data['is_customer']
         )
-
         password2 = self.validated_data['password2']
         if user.password != password2:
             return serializers.ValidationError({'Password must match!'})

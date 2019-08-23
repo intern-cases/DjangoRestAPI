@@ -1,7 +1,7 @@
 from .views import DealerCreateAPIView, DealerDetailAPIView, DealerListAPIView,\
     DealerUpdateAPIView, DealerDeleteAPIView
 from django.urls import path, include
-"""DealerCreateAPIView,"""
+
 app_name = "Dealer"
 
 urlpatterns = [

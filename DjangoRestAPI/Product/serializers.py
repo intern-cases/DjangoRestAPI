@@ -3,9 +3,8 @@ from DjangoRestAPI.Product.models import Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    #url = serializers.HyperlinkedIdentityField()
-
     class Meta:
+        model = Product
         fields = (
             'dealer',
             'photo',
@@ -14,11 +13,10 @@ class ProductSerializer(serializers.ModelSerializer):
             'created_date',
             'modified_date',
         )
-        model = Product
+
 
 
 class ProductUpdateSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Product
         fields = (

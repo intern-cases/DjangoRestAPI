@@ -1,5 +1,3 @@
-
-# Create your models here.
 from django.contrib.gis.db.models import PointField
 from django.contrib.auth.models import AbstractUser
 from django.db import models

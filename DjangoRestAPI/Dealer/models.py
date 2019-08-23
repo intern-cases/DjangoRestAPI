@@ -2,10 +2,7 @@ from DjangoRestAPI import settings
 from DjangoRestAPI.Company.models import Company
 from django.db import models
 from django.contrib.gis.db.models import PointField
-from DjangoRestAPI.accounts.models import User
 # Create your models here.
-
-# dealers/models.py
 
 
 class Dealer(models.Model):

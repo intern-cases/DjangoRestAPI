@@ -4,7 +4,6 @@ from DjangoRestAPI.Product.serializers import ProductSerializer
 
 
 class DealerSerializer(serializers.ModelSerializer):
-    #url = serializers.HyperlinkedIdentityField()
     products = ProductSerializer(source='product_set', many=True)
 
     class Meta:

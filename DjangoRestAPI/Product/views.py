@@ -7,6 +7,9 @@ from django.utils.decorators import method_decorator
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
 from DjangoRestAPI.accounts.api.permissions import IsOwner
+from DjangoRestAPI.accounts.api.decorators import dealer_required
+from DjangoRestAPI.accounts.models import Customer
+from DjangoRestAPI.Dealer.models import Dealer
 # Create your views here.
 
 
@@ -47,8 +50,7 @@ class ProductUpdateAPIView(RetrieveUpdateAPIView):
         return Response(serializer.data)
 
 
-@permission_classes([IsAdminUser])
-@method_decorator(login_required, name='dispatch')
+@method_decorator([login_required, dealer_required], name='dispatch')
 class ProductCreateAPIView(CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductUpdateSerializer

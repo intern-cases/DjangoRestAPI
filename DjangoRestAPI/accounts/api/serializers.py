@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 
-from DjangoRestAPI.accounts.models import User
+from DjangoRestAPI.accounts.models import User, Customer
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -30,3 +30,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
+class CustomerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Customer
+        fields = ['location', 'is_active']

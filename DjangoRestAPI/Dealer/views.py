@@ -4,11 +4,12 @@ from .serializers import DealerSerializer, DealerUpdateSerializer
 from .models import Dealer
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from DjangoRestAPI.accounts.api.decorators import company_required
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
 from DjangoRestAPI.accounts.api.permissions import IsOwner
-
+from DjangoRestAPI.accounts.models import Customer
+from DjangoRestAPI.Dealer.models import Dealer
+from django.contrib.gis.measure import D
 # Create your views here.
 
 
@@ -16,6 +17,16 @@ from DjangoRestAPI.accounts.api.permissions import IsOwner
 class DealerListAPIView(ListAPIView):
     queryset = Dealer.objects.filter(is_active=True)
     serializer_class = DealerSerializer
+
+    def list(self, request):
+        user = self.request.user
+        if user.is_customer is True:
+            customer = Customer.objects.get(user=user)
+            queryset = Dealer.objects.filter(point_distance_lte=(customer.location, D(km=5)))
+            serializer = DealerSerializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response(404)
 
 
 @method_decorator([login_required], name='dispatch')

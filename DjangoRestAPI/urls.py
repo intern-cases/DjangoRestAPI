@@ -18,8 +18,9 @@ from django.urls import path, include
 
 
 urlpatterns = [
+    path('jet/', include('jet.urls')),  # Django JET URLS
     path('admin/', admin.site.urls),
-    path('products/', include('DjangoRestAPI.Product.urls')),
+    path('products', include('DjangoRestAPI.Product.urls')),
     path('dealers/', include('DjangoRestAPI.Dealer.urls')),
     path('companies/', include('DjangoRestAPI.Company.urls')),
     path('accounts/', include('DjangoRestAPI.accounts.api.urls')),

@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAdminUser
 from DjangoRestAPI.accounts.api.permissions import IsOwner
 
 
+@permission_classes([IsAdminUser | IsOwner])
 @method_decorator([login_required, company_required], name='dispatch')
 class CompanyListAPIView(ListAPIView):
     queryset = Company.objects.filter(is_active=True)

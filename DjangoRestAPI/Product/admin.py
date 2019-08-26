@@ -1,5 +1,5 @@
 from django.contrib import admin
-from DjangoRestAPI.Product.models import Product
+from DjangoRestAPI.Product.models import Product, Discount
 # Register your models here.
 
 
@@ -11,3 +11,4 @@ class ProductModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductModelAdmin)
+admin.site.register(Discount)

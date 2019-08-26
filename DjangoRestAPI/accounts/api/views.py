@@ -1,7 +1,9 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import RegistrationSerializer
+from .serializers import RegistrationSerializer, CustomerSerializer
+from rest_framework.generics import RetrieveAPIView, CreateAPIView
+from DjangoRestAPI.accounts.models import Customer
 
 
 @api_view(['POST',])
@@ -20,3 +22,17 @@ def registration_view(request):
         else:
             data = serializer.errors
         return Response(data)
+
+
+class CustomerDetailView(RetrieveAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+
+class CustomerCreateAPIView(CreateAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+

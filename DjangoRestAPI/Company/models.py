@@ -6,7 +6,7 @@ from DjangoRestAPI.accounts.models import User
 
 
 class Company(models.Model):
-    #user = models.OneToOneField(on_delete=models.CASCADE, unique=True, default=None, to=settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(on_delete=models.CASCADE, unique=True, default=None, to=settings.AUTH_USER_MODEL)
     id = models.AutoField(primary_key=True)
     company_name = models.CharField(max_length=50, unique=True)
     working_area = models.CharField(max_length=30)

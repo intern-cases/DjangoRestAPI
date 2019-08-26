@@ -8,8 +8,10 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
 from DjangoRestAPI.accounts.api.permissions import IsOwner
 from DjangoRestAPI.accounts.models import Customer
-from DjangoRestAPI.Dealer.models import Dealer
 from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
+
+
 # Create your views here.
 
 
@@ -21,8 +23,13 @@ class DealerListAPIView(ListAPIView):
     def list(self, request):
         user = self.request.user
         if user.is_customer is True:
-            customer = Customer.objects.get(user=user)
-            queryset = Dealer.objects.filter(point_distance_lte=(customer.location, D(km=5)))
+            customer = Customer.objects.filter(user=user)
+            point_array = customer.location.split(",")
+            lat = float(point_array[0])
+            lng = float(point_array[1])
+            point = Point(lat, lng)
+            radius = 500
+            queryset = Dealer.objects.filter(location_lte=(point, D(km=radius)))
             serializer = DealerSerializer(queryset, many=True)
             return Response(serializer.data)
         else:

@@ -6,13 +6,15 @@ class DiscountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Discount
         fields = (
-            '',
-            '',
-            '',
+            'product',
+            'is_active',
+            'discount_price',
+            'discount_finish',
         )
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    discount = DiscountSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
@@ -24,6 +26,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'declaration',
             'created_date',
             'modified_date',
+            'discount',
         )
 
 

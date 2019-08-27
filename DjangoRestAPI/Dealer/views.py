@@ -1,27 +1,57 @@
-from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView,  CreateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView, CreateAPIView
 from rest_framework.response import Response
-
 from .serializers import DealerSerializer, DealerUpdateSerializer
 from .models import Dealer
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAdminUser
+from DjangoRestAPI.accounts.api.permissions import IsOwner
+from DjangoRestAPI.accounts.models import Customer
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
+
+
 # Create your views here.
 
 
+@method_decorator([login_required], name='dispatch')
 class DealerListAPIView(ListAPIView):
     queryset = Dealer.objects.filter(is_active=True)
     serializer_class = DealerSerializer
 
+    def list(self, request):
+        user = self.request.user
+        if user.is_customer:
+            customer = Customer.objects.get(user=user)
+            lat = float(customer.location.x)
+            lng = float(customer.location.y)
+            point = Point(lat, lng)
+            radius = 500
+            queryset = Dealer.objects.filter(location=(point, D(km=radius)))
+            serializer = DealerSerializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            queryset = Dealer.objects.get_queryset()
+            serializer = DealerSerializer(queryset, many=True)
+            return Response(serializer.data)
 
+
+@method_decorator([login_required], name='dispatch')
 class DealerDetailAPIView(RetrieveAPIView):
     queryset = Dealer.objects.all()
     serializer_class = DealerSerializer
 
 
+@permission_classes([IsAdminUser | IsOwner])
+@method_decorator(login_required, name='dispatch')
 class DealerDeleteAPIView(DestroyAPIView):
     queryset = Dealer.objects.all()
     serializer_class = DealerSerializer
 
 
+@permission_classes([IsAdminUser | IsOwner])
+@method_decorator(login_required, name='dispatch')
 class DealerUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Dealer.objects.all()
     serializer_class = DealerUpdateSerializer
@@ -38,26 +68,11 @@ class DealerUpdateAPIView(RetrieveUpdateAPIView):
         return Response(serializer.data)
 
 
-"""class DealerCreateAPIView(CreateAPIView):
+@permission_classes([IsAdminUser | IsOwner])
+@method_decorator(login_required, name='dispatch')
+class DealerCreateAPIView(CreateAPIView):
     queryset = Dealer.objects.all()
-    serializer_class = DealerUpdateSerializer"""
+    serializer_class = DealerUpdateSerializer
 
-from django.contrib.auth import login
-from django.views.generic import CreateView
-
-from ..forms import DealerSignUpForm
-from DjangoRestAPI.accounts.models import User
-
-
-class StudentSignUpView(CreateView):
-    model = User
-    form_class = DealerSignUpForm
-    template_name = 'signup.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'company'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

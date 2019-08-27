@@ -1,4 +1,4 @@
-from .views import DealerCreateAPIView,DealerDetailAPIView, DealerListAPIView,\
+from .views import DealerCreateAPIView, DealerDetailAPIView, DealerListAPIView,\
     DealerUpdateAPIView, DealerDeleteAPIView
 from django.urls import path, include
 

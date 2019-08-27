@@ -15,15 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from DjangoRestAPI import views
-from django.contrib.auth import views as auth_views
+from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
+
+
+schema_view = get_swagger_view(title='Django Rest API')
 
 urlpatterns = [
+    path('jet/', include('jet.urls')),  # Django JET URLS
     path('admin/', admin.site.urls),
     path('products/', include('DjangoRestAPI.Product.urls')),
     path('dealers/', include('DjangoRestAPI.Dealer.urls')),
-    path('companys/', include('DjangoRestAPI.Company.urls')),
-    path('signup/', views.Signup.as_view(), name='signup'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('companies/', include('DjangoRestAPI.Company.urls')),
+    path('accounts/', include('DjangoRestAPI.accounts.api.urls')),
+    url(r'^api-docs$', schema_view),
 ]

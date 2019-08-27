@@ -1,3 +1,4 @@
+ipdb
 asn1crypto==0.24.0
 bcrypt==3.1.7
 cached-property==1.5.1
@@ -30,3 +31,6 @@ django-money
 Pillow
 django-rest-auth
 django-location-field
+django-jet
+Distance
+django-rest-swagger

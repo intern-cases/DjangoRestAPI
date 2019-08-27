@@ -18,6 +18,8 @@ Yeni terminal sekmesinde:
     root:/app# python manage.py migrate
     root:/app# python manage.py runserver 0.0.0.0:1881
     
+    root:/app# python manage.py checkdiscount
+    Tarihi geçmiş indirim bitiş tarihlerini kontrol edip indirimleri kaldıran command
     
     http://0.0.0.0:1881/api-docs
     Swagger ile API endpointlerini ve testleri için kullanabilirsiniz.

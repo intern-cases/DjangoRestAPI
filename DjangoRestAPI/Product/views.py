@@ -8,8 +8,6 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
 from DjangoRestAPI.accounts.api.permissions import IsOwner
 from DjangoRestAPI.accounts.api.decorators import dealer_required
-from DjangoRestAPI.accounts.models import Customer
-from DjangoRestAPI.Dealer.models import Dealer
 # Create your views here.
 
 

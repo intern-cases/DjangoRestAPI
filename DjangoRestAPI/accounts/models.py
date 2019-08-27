@@ -1,14 +1,12 @@
-
-# Create your models here.
 from django.contrib.gis.db.models import PointField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 class User(AbstractUser):
-    is_company = models.BooleanField(default=False)
-    is_dealer = models.BooleanField(default=False)
-    is_customer = models.BooleanField(default=False)
+    is_company = models.BooleanField(default=False, null=True)
+    is_dealer = models.BooleanField(default=False, null=True)
+    is_customer = models.BooleanField(default=False, null=True)
 
 
 class Customer(models.Model):
@@ -18,3 +16,6 @@ class Customer(models.Model):
     is_active = models.BooleanField(default=True)
     created_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return str(self.user)

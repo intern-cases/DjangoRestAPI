@@ -22,18 +22,19 @@ class DealerListAPIView(ListAPIView):
 
     def list(self, request):
         user = self.request.user
-        if user.is_customer is True:
-            customer = Customer.objects.filter(user=user)
-            point_array = customer.location.split(",")
-            lat = float(point_array[0])
-            lng = float(point_array[1])
+        if user.is_customer:
+            customer = Customer.objects.get(user=user)
+            lat = float(customer.location.x)
+            lng = float(customer.location.y)
             point = Point(lat, lng)
             radius = 500
-            queryset = Dealer.objects.filter(location_lte=(point, D(km=radius)))
+            queryset = Dealer.objects.filter(location=(point, D(km=radius)))
             serializer = DealerSerializer(queryset, many=True)
             return Response(serializer.data)
         else:
-            return Response(404)
+            queryset = Dealer.objects.all()
+            serializer = DealerSerializer(queryset, many=True)
+            return Response(serializer.data)
 
 
 @method_decorator([login_required], name='dispatch')

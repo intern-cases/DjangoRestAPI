@@ -4,7 +4,7 @@ from DjangoRestAPI.Product.serializers import ProductSerializer
 
 
 class DealerSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(source='product_set', many=True)
+    products = ProductSerializer(many=True, read_only=True)
 
     class Meta:
         model = Dealer

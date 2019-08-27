@@ -9,15 +9,15 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'username', 'password', 'password2', 'is_company', 'is_dealer', 'is_customer']
+        fields = ['username', 'email', 'password', 'password2', 'is_company', 'is_dealer', 'is_customer']
         extra_kwargs = {
             'password': {'write_only': True}
         }
 
     def save(self):
         user = User.objects.create(
-            email=self.validated_data['email'],
             username=self.validated_data['username'],
+            email=self.validated_data['email'],
             password=make_password(self.validated_data['password']),
             is_company=self.validated_data['is_company'],
             is_dealer=self.validated_data['is_dealer'],
@@ -36,3 +36,10 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = ['location', 'is_active']
+
+
+class CustomerListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Customer
+        fields = ['location', 'user']

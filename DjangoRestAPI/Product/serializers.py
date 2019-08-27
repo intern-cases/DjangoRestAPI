@@ -13,7 +13,6 @@ class DiscountSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    products = DiscountSerializer(source='product_set', many=True)
 
     class Meta:
         model = Product

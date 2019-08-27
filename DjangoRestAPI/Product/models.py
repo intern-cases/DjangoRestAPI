@@ -15,7 +15,7 @@ class Product(models.Model):
     modified_date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.declaration
+        return str(self.declaration)
 
 
 class Discount(models.Model):
@@ -26,4 +26,7 @@ class Discount(models.Model):
     discount_finish = models.DateField()
     created_date = models.DateField(auto_now_add=True, editable=False)
     modified_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return str(self.product)
 

@@ -19,7 +19,7 @@ class Product(models.Model):
 
 
 class Discount(models.Model):
-    product = models.ForeignKey(Product, related_name='discount', on_delete=models.CASCADE, null=True, unique=True)
+    product = models.OneToOneField(Product, related_name='discount', on_delete=models.CASCADE, null=True, unique=True)
     is_active = models.BooleanField(default=True)
     discount_price = models.DecimalField(max_digits=14, decimal_places=2)
     discount_start = models.DateField(auto_now=True)

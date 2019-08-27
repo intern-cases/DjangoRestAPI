@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'django.contrib.gis',
     'location_field.apps.DefaultConfig',
-
+    'DjangoRestAPI',
     'DjangoRestAPI.accounts',
     'DjangoRestAPI.Company',
     'DjangoRestAPI.Dealer',

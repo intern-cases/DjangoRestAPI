@@ -13,7 +13,6 @@ def registration_view(request):
         data = {}
         if serializer.is_valid():
             user = serializer.save()
-            data['response'] = 'succesfully registered user'
             data['email'] = user.email
             data['username'] = user.username
             data['is_company'] = user.is_company

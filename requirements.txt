@@ -33,3 +33,4 @@ django-rest-auth
 django-location-field
 django-jet
 Distance
+django-rest-swagger

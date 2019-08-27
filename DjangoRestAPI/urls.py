@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
-from rest_framework.schemas.coreapi import AutoSchema
 
 
 schema_view = get_swagger_view(title='Django Rest API')
@@ -24,8 +24,9 @@ schema_view = get_swagger_view(title='Django Rest API')
 urlpatterns = [
     path('jet/', include('jet.urls')),  # Django JET URLS
     path('admin/', admin.site.urls),
-    path('products', include('DjangoRestAPI.Product.urls')),
+    path('products/', include('DjangoRestAPI.Product.urls')),
     path('dealers/', include('DjangoRestAPI.Dealer.urls')),
     path('companies/', include('DjangoRestAPI.Company.urls')),
     path('accounts/', include('DjangoRestAPI.accounts.api.urls')),
+    url(r'^api-docs$', schema_view),
 ]

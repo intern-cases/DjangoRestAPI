@@ -32,7 +32,7 @@ class DealerListAPIView(ListAPIView):
             serializer = DealerSerializer(queryset, many=True)
             return Response(serializer.data)
         else:
-            queryset = Dealer.objects.all()
+            queryset = Dealer.objects.get_queryset()
             serializer = DealerSerializer(queryset, many=True)
             return Response(serializer.data)
 

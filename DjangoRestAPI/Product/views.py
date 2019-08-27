@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView,  CreateAPIView
 from rest_framework.response import Response
-from .serializers import ProductSerializer, ProductUpdateSerializer
-from .models import Product
+from .serializers import ProductSerializer, ProductUpdateSerializer, DiscountSerializer
+from .models import Product, Discount
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from rest_framework.decorators import permission_classes
@@ -15,7 +15,7 @@ from DjangoRestAPI.Dealer.models import Dealer
 
 @method_decorator(login_required, name='dispatch')
 class ProductListAPIView(ListAPIView):
-    queryset = Product.objects.filter(is_active=True)
+    queryset = Product.objects.filter(is_active=True, is_discount=True)
     serializer_class = ProductSerializer
 
 
@@ -57,3 +57,10 @@ class ProductCreateAPIView(CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+@method_decorator([login_required, dealer_required], name='dispatch')
+class DiscountCreateAPIView(CreateAPIView):
+    queryset = Discount.objects.all()
+    serializer_class = DiscountSerializer
+

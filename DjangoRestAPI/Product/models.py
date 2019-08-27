@@ -5,7 +5,7 @@ from django.db import models
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
-    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE, null=True)
+    dealer = models.ForeignKey(Dealer, related_name='products', on_delete=models.CASCADE, null=True)
     is_active = models.BooleanField(default=True)
     declaration = models.CharField(max_length=500)
     is_discount = models.BooleanField(default=False)
@@ -19,7 +19,7 @@ class Product(models.Model):
 
 
 class Discount(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, related_name='discount', on_delete=models.CASCADE, null=True, unique=True)
     is_active = models.BooleanField(default=True)
     discount_price = models.DecimalField(max_digits=14, decimal_places=2)
     discount_start = models.DateField(auto_now=True)

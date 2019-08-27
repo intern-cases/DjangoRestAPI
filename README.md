@@ -13,7 +13,7 @@ Start
 ---
 Yeni terminal sekmesinde:
 
-    $ docker exec -it flaskrestapi_app_1 bash
+    $ docker exec -it djangorestapi_app_1 bash
     root:/app# python manage.py makemigrations
     root:/app# python manage.py migrate
     root:/app# python manage.py runserver 0.0.0.0:1881

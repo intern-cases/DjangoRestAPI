@@ -27,7 +27,7 @@ Yeni terminal sekmesinde:
     
 Projenin Amacı ve İşlevi
 ---
- Kullanıcılar siteye kaydolabilir ve admin yetkisili şirketler için hesap oluşturur. Şirket hesabıyla 
+ Kullanıcılar siteye kaydolabilir ve admin yetkilisi şirketler için hesap oluşturur. Şirket hesabıyla 
  giriş yapan kullanıcılar kendi bayilerini oluşturabilir ve kayıt olmuş kullanıcı hesapları bayi olarak tanımlanabilir.
  Şirket, bayi, müşteri hesaplarının hepsi konum belirtmek zorundadır.
  
